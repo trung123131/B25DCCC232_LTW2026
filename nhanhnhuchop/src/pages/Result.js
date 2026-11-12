@@ -13,7 +13,6 @@ const Result = () => {
 
   const { playerName, answers, score, correctCount } = location.state;
   const starInfo = getStars(correctCount);
-
   const starIcons = '★'.repeat(starInfo.stars) + '☆'.repeat(3 - starInfo.stars);
 
   return (
@@ -21,10 +20,10 @@ const Result = () => {
       <div style={{ textAlign: 'center', marginBottom: '25px', padding: '20px', backgroundColor: '#f8f9fa', borderRadius: '10px' }}>
         <h2 style={{ color: 'orange', margin: '0 0 10px' }}>{starInfo.message}</h2>
         <p style={{ fontSize: '18px', margin: '6px 0' }}>Người chơi: <strong>{playerName}</strong></p>
-        <p style={{ fontSize: '18px', margin: '6px 0' }}>Số câu trả lời đúng: <strong>{correctCount}/15</strong></p>
+        <p style={{ fontSize: '18px', margin: '6px 0' }}>Số câu trả lời đúng: <strong>{`${correctCount}/15`}</strong></p>
         <p style={{ fontSize: '18px', margin: '6px 0' }}>Điểm: <strong>{score}</strong></p>
         <p style={{ fontSize: '20px', margin: '10px 0 0', color: '#d39e00' }}>
-          Xếp loại: {starInfo.stars} sao <span style={{ fontSize: '24px' }}>{starIcons}</span>
+          {`Xếp loại: ${starInfo.stars} sao `}<span style={{ fontSize: '24px' }}>{starIcons}</span>
         </p>
       </div>
 
@@ -49,10 +48,10 @@ const Result = () => {
                   backgroundColor: isCorrect ? '#d4edda' : '#f8d7da'
                 }}
               >
-                <td>{idx + 1}</td>
+                <td>{item.swappedTo ? `Câu ${idx + 1} (đổi sang câu ${item.swappedTo})` : idx + 1}</td>
                 <td>{item.chosen !== null ? LETTERS[item.chosen] : '-'}</td>
                 <td><strong>{LETTERS[item.correct]}</strong></td>
-                <td>{item.timeLeft} giây</td>
+                <td>{`${item.timeLeft} giây`}</td>
                 <td>{item.points}</td>
               </tr>
             );

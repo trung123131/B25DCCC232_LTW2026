@@ -1,8 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Home = ({ playerName, setPlayerName }) => {
+const Home = ({ playerName, setPlayerName, history }) => {
   const navigate = useNavigate();
+
+  const bestRecord = history.length > 0
+    ? [...history].sort((a, b) => b.score - a.score)[0]
+    : null;
 
   const handleStart = (e) => {
     e.preventDefault();
@@ -13,9 +17,15 @@ const Home = ({ playerName, setPlayerName }) => {
 
   return (
     <div style={{ maxWidth: '650px', margin: '30px auto', padding: '25px', border: '1px solid #ddd', borderRadius: '10px', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
-      <h1 style={{ textAlign: 'center', color: 'orange', marginBottom: '20px' }}>
+      <h1 style={{ textAlign: 'center', color: 'orange', marginBottom: '15px' }}>
         Nhanh Như Chớp
       </h1>
+
+      {bestRecord && (
+        <p style={{ textAlign: 'center', fontSize: '18px', fontWeight: 'bold', color: '#d39e00', marginBottom: '20px' }}>
+          {`Kỷ lục: ${bestRecord.score} điểm – ${bestRecord.name}`}
+        </p>
+      )}
 
       <div style={{ backgroundColor: '#fcf8e3', padding: '15px 20px', borderRadius: '6px', marginBottom: '25px', lineHeight: '1.6' }}>
         <h4 style={{ margin: '0 0 8px', color: '#8a6d3b' }}>Luật chơi:</h4>

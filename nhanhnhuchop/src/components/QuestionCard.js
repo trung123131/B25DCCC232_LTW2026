@@ -8,12 +8,13 @@ const QuestionCard = ({
   totalQuestions,
   onSelectAnswer,
   selectedAnswer,
-  isRevealed
+  isRevealed,
+  focusedIndex
 }) => {
   return (
     <div style={{ marginTop: '20px' }}>
       <h3 style={{ margin: '0 0 10px', color: '#0066cc' }}>
-        Câu {currentIndex + 1}/{totalQuestions} – {LEVELS[question.level]}
+        {`Câu ${currentIndex + 1}/${totalQuestions} – ${LEVELS[question.level]}`}
       </h3>
       <p style={{ fontSize: '19px', fontWeight: '600', minHeight: '50px', margin: '0 0 20px' }}>
         {question.question}
@@ -23,6 +24,7 @@ const QuestionCard = ({
         {question.options.map((option, idx) => {
           const isCorrect = isRevealed && idx === question.answer;
           const isWrong = isRevealed && selectedAnswer === idx && idx !== question.answer;
+          const isFocused = !isRevealed && focusedIndex === idx;
 
           return (
             <AnswerButton
@@ -33,6 +35,7 @@ const QuestionCard = ({
               disabled={isRevealed}
               isCorrect={isCorrect}
               isWrong={isWrong}
+              isFocused={isFocused}
             />
           );
         })}
